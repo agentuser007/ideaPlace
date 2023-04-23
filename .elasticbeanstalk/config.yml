@@ -1,2 +1,22 @@
+branch-defaults:
+  main:
+    environment: null
+    group_suffix: null
+environment-defaults:
+  x22174435ip-env:
+    branch: null
+    repository: null
 global:
+  application_name: x22174435ip
+  branch: null
+  default_ec2_keyname: x22174435ipk
+  default_platform: Python 3.7 running on 64bit Amazon Linux 2
+  default_region: eu-west-3
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
   profile: null
+  repository: null
+  sc: git
+  workspace_type: Application
