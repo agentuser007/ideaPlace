@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Idea List</h1>
+  <ul>
+    {% for idea in idea_list %}
+      <li><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a> - {{ idea.content }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

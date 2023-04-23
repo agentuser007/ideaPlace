@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">IdeaPlace</h1>
+        <p class="lead">Welcome to IdeaPlace!</p>
+    </div>
+
+    <div class="row">
+        {% for idea in ideas %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></h5>
+                        <p class="card-text">{{ idea.content }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Posted by: {{ idea.user.username }}</small>
+                        <br>
+                        <small class="text-muted">{{ idea.likes.count }} likes</small>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-md-12">
+                <p>No ideas found.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if request.GET.like_success %}
+        <div class="alert alert-success mt-4" role="alert">
+            Your like has been recorded successfully.
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <div class="mt-4">
+            <h2>New Idea</h2>
+            <form method="post" action="{% url 'idea_create' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea class="form-control" name="content" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <p><a href="{% url 'login' %}">Log in</a> or <a href="{% url 'register' %}">Register</a> to create new ideas.</p>
+        </div>
+    {% endif %}
+{% endblock %}

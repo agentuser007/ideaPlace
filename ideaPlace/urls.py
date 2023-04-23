@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ideas import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
+    path('', views.home_view, name='home'),
+    path('create/', views.idea_create, name='idea_create'),
+    path('logout/', views.logout_view, name='logout'),
+    path('ideas/create/', views.idea_create, name='idea_create'),
+    path('ideas/<int:pk>/', views.idea_detail, name='idea_detail'),
+    path('ideas/<int:pk>/update/', views.idea_update, name='idea_update'),
+    path('ideas/<int:pk>/delete/', views.idea_delete, name='idea_delete'),
+    path('user/', views.user_profile, name='user_profile'),
+    path('user/ideas/', views.user_ideas, name='user_ideas'),
+    path('like/<int:pk>/', views.idea_like, name='idea_like'),
+
 ]

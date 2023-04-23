@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Title: {{ idea.title }}</h1>
+        <p class="lead">Content: {{ idea.content }}</p>
+        <p>Posted by {{ idea.user.username }}</p>
+        <p>Likes: {{ idea.likes.count }}</p>
+
+        {% if user.is_authenticated %}
+          {% if user in idea.likes.all %}
+            <form method="POST" action="{% url 'idea_like' pk=idea.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Unlike</button>
+            </form>
+            <p>You have already liked this idea.</p>
+          {% else %}
+            <form method="POST" action="{% url 'idea_like' pk=idea.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success">Like</button>
+            </form>
+          {% endif %}
+        {% else %}
+          <p>Please log in to like this idea.</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Back to main page</a>
+
+        {% if messages %}
+          <ul class="messages mt-3">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

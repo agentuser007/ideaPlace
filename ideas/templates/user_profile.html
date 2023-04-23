@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <h1 class="mb-3">User Profile</h1>
+      <p><strong>Username:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+    <div class="col-md-6 mb-3">
+      <h2 class="mb-3">My Ideas</h2>
+      {% if ideas %}
+        <ul class="list-group mb-3">
+          {% for idea in ideas %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0"><a href="{% url 'idea_detail' pk=idea.pk %}">{{ idea.title }}</a></h6>
+                <small class="text-muted">Posted by: {{ idea.user.username }}</small>
+                <p class="mb-1">Likes: {{ idea.likes.count }}</p>
+              </div>
+              <span>
+                <a href="{% url 'idea_update' idea.id %}">Edit</a>
+                <form action="{% url 'idea_delete' idea.id %}" method="POST" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-link text-danger">Delete</button>
+                </form>
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>You haven't created any ideas yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <h2 class="mb-3">Liked Ideas</h2>
+      {% if liked_ideas %}
+        <ul class="list-group mb-3">
+          {% for like in liked_ideas %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">{{ like.idea.title }}</h6>
+                <small class="text-muted">Posted by: {{ like.idea.user.username }}</small>
+                <p class="mb-1">Likes: {{ like.idea.likes.count }}</p>
+              </div>
+              <span>
+                <a href="{% url 'idea_detail' pk=like.idea.pk %}">View</a>
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{{ user.username }} has not liked any ideas yet.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
