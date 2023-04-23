@@ -12,7 +12,6 @@ phases:
             - python --version
     build:
         commands:
-
 artifacts:
     files:
         - '**/*'
