@@ -12,12 +12,14 @@ from django.contrib.auth.models import User
 from ideas.models import Idea
 from django.db.models import Subquery, OuterRef
 from django.contrib import messages
+from lib.obj_to_string import obj_to_string
 
 def user_ideas(request):
     # Get all ideas created by the current user
     ideas = Idea.objects.filter(user=request.user)
     context = {
         'ideas': ideas,
+        
     }
     return render(request, 'user_profile.html', context)
 
@@ -37,7 +39,7 @@ def idea_like(request, pk):
     if like:
         like.delete()
         idea.likes.remove(request.user)
-        messages.success(request, 'You unliked this idea.')
+        messages.success(request, obj_to_string(idea))
     else:
         liked = True
         Like.objects.create(user=request.user, idea=idea)
