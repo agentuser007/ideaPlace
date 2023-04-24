@@ -39,7 +39,7 @@ def idea_like(request, pk):
     if like:
         like.delete()
         idea.likes.remove(request.user)
-        messages.success(request, obj_to_string(idea))
+        messages.success(request, "Unlike "+obj_to_string(idea))
     else:
         liked = True
         Like.objects.create(user=request.user, idea=idea)
