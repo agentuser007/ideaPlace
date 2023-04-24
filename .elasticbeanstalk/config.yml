@@ -7,11 +7,10 @@ environment-defaults:
     branch: null
     repository: null
 global:
-  application_name: x22174435ip
+  application_name: x22174435-ipe
   branch: null
-  default_ec2_keyname: x22174435ipk
-  default_platform: Python 3.7 running on 64bit Amazon Linux 2
-  default_region: eu-west-3
+  default_platform: Python 3.8 running on 64bit Amazon Linux 2
+  default_region: eu-north-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
