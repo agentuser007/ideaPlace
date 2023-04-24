@@ -1,16 +1,12 @@
 branch-defaults:
   main:
-    environment: null
+    environment: x22174435ipea-env
     group_suffix: null
-environment-defaults:
-  x22174435ip-env:
-    branch: null
-    repository: null
 global:
-  application_name: x22174435-ipe
+  application_name: x22174435-ipea
   branch: null
-  default_platform: Python 3.8 running on 64bit Amazon Linux 2
-  default_region: eu-north-1
+  default_platform: Python 3.7 running on 64bit Amazon Linux 2
+  default_region: us-west-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
