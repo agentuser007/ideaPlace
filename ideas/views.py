@@ -13,6 +13,23 @@ from ideas.models import Idea
 from django.db.models import Subquery, OuterRef
 from django.contrib import messages
 from lib.obj_to_string import obj_to_string
+from django.db.models import Q
+
+
+#def idea_search(request):
+#    query = request.GET.get('q')
+#    ideas = Idea.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+#    return render(request, 'idea_search', {'ideas': ideas, 'query': query})
+
+def idea_search(request):
+    query = request.GET.get('query')
+    if query:
+        ideas = Idea.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+    else:
+        ideas = Idea.objects.all()
+    context = {'ideas': ideas, 'query': query}
+    return render(request, 'search_results.html', context)
+
 
 def user_ideas(request):
     # Get all ideas created by the current user
@@ -79,7 +96,6 @@ def login_view(request):
 def home_view(request):
     ideas = Idea.objects.all()
     return render(request, 'home.html', {'ideas': ideas})
-    
 
 
 def idea_list(request):

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Search Results for "{{ query }}"</h1>
+  {% if ideas %}
+    <ul>
+      {% for idea in ideas %}
+        <li><a href="{% url 'idea_detail' pk=idea.pk %}">{{ idea.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No ideas found matching "{{ query }}".</p>
+  {% endif %}
+{% endblock %}

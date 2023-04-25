@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from ideas import views
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_view, name='login'),
@@ -31,5 +33,7 @@ urlpatterns = [
     path('user/', views.user_profile, name='user_profile'),
     path('user/ideas/', views.user_ideas, name='user_ideas'),
     path('like/<int:pk>/', views.idea_like, name='idea_like'),
+    path('search/', views.idea_search, name='idea_search'),
+
 
 ]
