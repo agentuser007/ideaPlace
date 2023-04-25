@@ -2,13 +2,21 @@
 
 {% block content %}
   <h1>Search Results for "{{ query }}"</h1>
-  {% if ideas %}
-    <ul>
-      {% for idea in ideas %}
-        <li><a href="{% url 'idea_detail' pk=idea.pk %}">{{ idea.title }}</a></li>
-      {% endfor %}
-    </ul>
-  {% else %}
+
+        {% if ideas %}
+        <ul class="list-group mb-3">
+          {% for idea in ideas %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0"><a href="{% url 'idea_detail' pk=idea.pk %}">{{ idea.title }}</a></h6>
+                <small class="text-muted">Posted by: {{ idea.user.username }}</small>
+                <p class="mb-1">Likes: {{ idea.likes.count }}</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
     <p>No ideas found matching "{{ query }}".</p>
-  {% endif %}
+      {% endif %}
+
 {% endblock %}
