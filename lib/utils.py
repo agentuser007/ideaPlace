@@ -1,3 +1,7 @@
+from django.db.models import Count
+from django.shortcuts import render
+from ideas.models import Idea
+
 def obj_to_string(obj):
     """
     Convert an object to a string representation.
@@ -18,3 +22,9 @@ def truncate_text(text, length):
     else:
         return text
 
+def get_top_ideas(n):
+    """
+    Returns the top n ideas based on the number of likes.
+    """
+    ideas = Idea.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')[:n]
+    return ideas

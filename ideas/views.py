@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from ideas.models import Idea
 from django.db.models import Subquery, OuterRef
 from django.contrib import messages
-from lib.utils import obj_to_string, truncate_text
+from lib.utils import obj_to_string, truncate_text, get_top_ideas
 from django.db.models import Q
 from PIL import Image
 
@@ -121,7 +121,8 @@ def idea_create(request):
 
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    return render(request, 'idea_detail.html', {'idea': idea})
+    top_ideas = get_top_ideas(3)
+    return render(request, 'idea_detail.html', {'idea': idea, 'top_ideas': top_ideas})
 
 
 @login_required
