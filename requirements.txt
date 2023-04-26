@@ -1,6 +1,5 @@
 astroid==2.3.3
 attrs==23.1.0
-aws-cfn-bootstrap==2.0
 awsebcli==3.20.5
 backcall==0.2.0
 bcrypt==4.0.1
