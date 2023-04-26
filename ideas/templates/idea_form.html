@@ -2,9 +2,10 @@
 
 {% block content %}
   <h1>{{ form_title }}</h1>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    
+    <button  class="btn btn-primary" type="submit">Submit</button>
   </form>
 {% endblock %}

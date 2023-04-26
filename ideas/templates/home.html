@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% load custom_filters %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -21,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></h5>
-                        <p class="card-text">{{ idea.content }}</p>
+                        <p class="card-text">{{idea.content|truncate_text_filter:100 }}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Posted by: {{ idea.user.username }}</small>
@@ -46,8 +47,9 @@
     {% if user.is_authenticated %}
         <div class="mt-4">
             <h2>New Idea</h2>
-            <form method="post" action="{% url 'idea_create' %}">
+            <form method="post" action="{% url 'idea_create' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ form.as_p }}
                 <div class="form-group">
                     <label for="title">Title:</label>
                     <input type="text" class="form-control" name="title" required>

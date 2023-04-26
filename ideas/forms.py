@@ -10,7 +10,9 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+
 class IdeaForm(forms.ModelForm):
     class Meta:
         model = Idea
-        fields = ['title', 'content']
+        fields = ('title', 'content', 'image')
+    image = forms.ImageField(required=False)

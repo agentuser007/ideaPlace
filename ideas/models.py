@@ -11,6 +11,7 @@ class Idea(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_ideas')
     created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     
     def __str__(self):
         return self.title

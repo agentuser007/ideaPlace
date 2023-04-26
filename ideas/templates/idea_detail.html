@@ -6,6 +6,10 @@
       <div class="col-md-8">
         <h1>Title: {{ idea.title }}</h1>
         <p class="lead">Content: {{ idea.content }}</p>
+                  {% if idea.image %}
+    <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
+  {% endif %}
+
         <p>Posted by {{ idea.user.username }}</p>
         <p>Likes: {{ idea.likes.count }}</p>
 

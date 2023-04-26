@@ -12,9 +12,9 @@ from django.contrib.auth.models import User
 from ideas.models import Idea
 from django.db.models import Subquery, OuterRef
 from django.contrib import messages
-from lib.obj_to_string import obj_to_string
+from lib.utils import obj_to_string, truncate_text
 from django.db.models import Q
-
+from PIL import Image
 
 #def idea_search(request):
 #    query = request.GET.get('q')
@@ -103,10 +103,11 @@ def idea_list(request):
     return render(request, 'idea_list.html', {'ideas': ideas})
 
 
+
 @login_required
 def idea_create(request):
     if request.method == 'POST':
-        form = IdeaForm(request.POST)
+        form = IdeaForm(request.POST, request.FILES)
         if form.is_valid():
             idea = form.save(commit=False)
             idea.user = request.user
@@ -115,6 +116,7 @@ def idea_create(request):
     else:
         form = IdeaForm()
     return render(request, 'idea_form.html', {'form': form})
+
 
 
 def idea_detail(request, pk):
@@ -127,7 +129,7 @@ def idea_update(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     if request.user == idea.user:
         if request.method == 'POST':
-            form = IdeaForm(request.POST, instance=idea)
+            form = IdeaForm(request.POST, request.FILES, instance=idea)
             if form.is_valid():
                 form.save()
                 return redirect('idea_detail', pk=idea.pk)
