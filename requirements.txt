@@ -14,9 +14,6 @@ colorama==0.4.3
 cryptography==40.0.2
 decorator==5.1.1
 Django==2.0.2
-docker==4.4.4
-docker-compose==1.25.5
-dockerpty==0.4.1
 docopt==0.6.2
 docutils==0.14
 git-remote-codecommit==1.16
@@ -29,13 +26,11 @@ jedi==0.18.2
 jmespath==1.0.1
 jsonschema==3.2.0
 lazy-object-proxy==1.4.3
-lockfile==0.11.0
 matplotlib-inline==0.1.6
 mccabe==0.6.1
 paramiko==3.1.0
 parso==0.8.3
 pathspec==0.10.1
-pbr==5.11.1
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==9.5.0
